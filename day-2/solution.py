@@ -12,8 +12,7 @@ move_func = [{
     'forward': (lambda x, y, aim, u: (x + u, y + (aim * u), aim)),
     'down': (lambda x, y, aim, u: (x, y, aim + u)),
     'up': (lambda x, y, aim, u: (x, y, aim - u))
-}
-]
+}]
 
 
 def solve_part(input, part):
