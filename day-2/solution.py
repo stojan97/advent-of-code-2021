@@ -1,8 +1,6 @@
 def get_input():
     with open('input') as f:
-        input = [tuple(line.strip().split()) for line in f]
-
-    return input
+        return [tuple(line.strip().split()) for line in f]
 
 
 move_func = [{
@@ -19,8 +17,7 @@ move_func = [{
 
 
 def solve_part(input, part):
-    x = y = 0
-    aim = 0
+    x = y = aim = 0
 
     for dir, units in input:
         u = int(units)
