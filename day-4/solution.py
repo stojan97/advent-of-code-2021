@@ -19,7 +19,7 @@ def get_input():
                 board.append([int(i) for i in line.split()])
 
     boards.append(board)
-    return (gen_numbers, boards)
+    return gen_numbers, boards
 
 
 def mark_board(board, gen):
@@ -44,7 +44,7 @@ def check_win(board):
 
 
 def sum_unmarked(board):
-    return sum([cell for row in board for cell in row if cell != -1])
+    return sum(cell for row in board for cell in row if cell != -1)
 
 
 def solve_parts(input):
