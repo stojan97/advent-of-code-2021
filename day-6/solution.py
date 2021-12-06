@@ -39,11 +39,7 @@ def part2(input):
                 dict[fish - 1] += val
                 dict[fish] -= val
 
-    total = 0
-    for key, val in dict.items():
-        total += val
-
-    return total
+    return sum(dict.values())
 
 
 input = get_input()
