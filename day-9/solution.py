@@ -38,23 +38,21 @@ def part1(input):
     return sum(input[i][j] + 1 for i, j in get_low_points(input))
 
 
-VISITED = set()
-
-def dfs(i, j, input):
-    VISITED.add((i, j))
+def dfs(i, j, visited, input):
+    visited.add((i, j))
     size = 1
     for x, y in ADJACENT(i, j):
-        if not (x in range(0, len(input)) and y in range(0, len(input[i]))) or (x, y) in VISITED or input[x][y] == 9:
+        if not (x in range(0, len(input)) and y in range(0, len(input[i]))) or (x, y) in visited or input[x][y] == 9:
             continue
 
         if input[i][j] < input[x][y]:
-            size += dfs(x, y, input)
+            size += dfs(x, y, visited, input)
 
     return size
 
 
 def part2(input):
-    basins_sizes = [dfs(i, j, input) for i, j in get_low_points(input)]
+    basins_sizes = [dfs(i, j, set(), input) for i, j in get_low_points(input)]
     basins_sizes.sort(reverse=True)
     return basins_sizes[0] * basins_sizes[1] * basins_sizes[2]
 
