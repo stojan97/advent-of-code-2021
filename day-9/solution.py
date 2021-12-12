@@ -45,8 +45,7 @@ def dfs(i, j, visited, input):
         if not (x in range(0, len(input)) and y in range(0, len(input[i]))) or (x, y) in visited or input[x][y] == 9:
             continue
 
-        if input[i][j] < input[x][y]:
-            size += dfs(x, y, visited, input)
+        size += dfs(x, y, visited, input)
 
     return size
 
