@@ -1,6 +1,4 @@
-import time
 from collections import defaultdict
-from copy import copy
 
 
 def get_input():
@@ -62,6 +60,4 @@ def part2(graph):
 
 graph = get_input()
 print('Part 1:', part1(graph))
-start = time.time()
 print('Part 2:', part2(graph))
-print(time.time() - start)
