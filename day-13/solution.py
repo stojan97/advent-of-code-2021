@@ -21,7 +21,6 @@ def get_input():
 
 
 def fold_it(points, folds):
-
     final_points = set(points)
 
     for coord, val in folds:
@@ -29,17 +28,15 @@ def fold_it(points, folds):
             for y, x in set(final_points):
                 if y > val:
                     next_y = val - (y - val)
-                    if next_y >= 0:
-                        final_points.remove((y, x))
-                        final_points.add((next_y, x))
+                    final_points.remove((y, x))
+                    final_points.add((next_y, x))
 
         if coord == 'x':
             for y, x in set(final_points):
                 if x > val:
                     next_x = val - (x - val)
-                    if next_x >= 0:
-                        final_points.remove((y, x))
-                        final_points.add((y, next_x))
+                    final_points.remove((y, x))
+                    final_points.add((y, next_x))
 
     return final_points
 
