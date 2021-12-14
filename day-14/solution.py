@@ -74,6 +74,8 @@ def part2(input):
     for k, v in copy(c).items():
         c[k] = math.ceil(c[k] / 2)
 
+    c[polymer[0]] += 1 if polymer[0] == polymer[-1] else 0
+
     max_res = c[max(c, key=c.get)]
     min_res = c[min(c, key=c.get)]
 
