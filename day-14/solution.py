@@ -71,7 +71,7 @@ def part2(input):
         c[k[0]] += v
         c[k[1]] += v
 
-    for k, v in copy(c).items():
+    for k in copy(c):
         c[k] = math.ceil(c[k] / 2)
 
     c[polymer[0]] += polymer[0] == polymer[-1]
