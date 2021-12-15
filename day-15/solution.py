@@ -27,10 +27,10 @@ def get_shortest_risk(grid):
     d[0][0] = 0
 
     while pq:
-        dist, i, j = heappop(pq)
+        dist_so_far, i, j = heappop(pq)
 
         if i == row - 1 and j == col - 1:
-            return dist
+            return dist_so_far
 
         if (i, j) in visited:
             continue
@@ -39,10 +39,10 @@ def get_shortest_risk(grid):
 
         for x, y in adj(i, j):
             if x in range(row) and y in range(col):
-                curr_dist = dist + grid[x][y]
-                if curr_dist < d[x][y]:
-                    d[x][y] = curr_dist
-                    heappush(pq, (curr_dist, x, y))
+                next_dist = dist_so_far + grid[x][y]
+                if next_dist < d[x][y]:
+                    d[x][y] = next_dist
+                    heappush(pq, (next_dist, x, y))
 
     return -1
 
