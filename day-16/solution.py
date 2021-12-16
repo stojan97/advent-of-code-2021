@@ -90,6 +90,7 @@ class Packet:
             return self.literal_value
 
         values = [sub_packet.get_value() for sub_packet in self.sub_packets]
+
         if self.id == 0:
             return sum(values)
 
