@@ -114,8 +114,7 @@ class Packet:
 
 
 def part1(root_packet):
-    version = root_packet.get_version_sum()
-    return version
+    return root_packet.get_version_sum()
 
 
 def part2(root_packet):
@@ -124,10 +123,12 @@ def part2(root_packet):
 
 def create_root_packet(init_packet):
     packet_bits = ''
+
     for i in init_packet:
         packet_bits += bin(int(i, 16))[2:].zfill(4)
-    p = Packet(packet_bits)
-    return p
+
+    root = Packet(packet_bits)
+    return root
 
 
 input = get_input()
