@@ -1,4 +1,5 @@
 import math
+import time
 from copy import deepcopy
 from heapq import heapify, heappop, heappush
 
@@ -38,7 +39,7 @@ def get_shortest_risk(grid):
         visited.add((i, j))
 
         for x, y in adj(i, j):
-            if x in range(row) and y in range(col):
+            if 0 <= x < row and 0 <= y < col:
                 next_dist = dist_so_far + grid[x][y]
                 if next_dist < d[x][y]:
                     d[x][y] = next_dist
