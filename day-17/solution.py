@@ -58,6 +58,7 @@ def part1_formula(input):
     _, (y1, y2) = input
     return summation(abs(y1) - 1)
 
+
 def solve(input):
     (x1, x2), (y1, y2) = input
     max_y = -math.inf
