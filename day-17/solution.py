@@ -56,7 +56,6 @@ def summation(n):
 
 def solve(input):
     (x1, x2), (y1, y2) = input
-    print(f'x1={x1}, x2={x2}, y1={y1}, y2={y2}')
     max_y = -math.inf
     count = 0
 
