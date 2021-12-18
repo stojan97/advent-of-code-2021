@@ -28,10 +28,6 @@ def get_input():
     return parsed
 
 
-def to_str(pair):
-    return ''.join(pair)
-
-
 def explode(pairs):
     i = 0
     opened = 0
