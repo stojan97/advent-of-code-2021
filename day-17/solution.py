@@ -68,7 +68,7 @@ def solve(input):
         if peak_x < x1:
             continue
 
-        for y_velocity in range(y1, abs(y1)):
+        for y_velocity in range(y1, abs(y1) + 1):
 
             reached_target, highest_y, x, y, x_res_vel, y_res_vel = simulate(x_velocity, y_velocity, input)
 
