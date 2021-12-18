@@ -56,7 +56,7 @@ def summation(n):
 
 def part1_formula(input):
     _, (y1, y2) = input
-    return summation(abs(y1 + 1))
+    return summation(abs(y1) - 1)
 
 def solve(input):
     (x1, x2), (y1, y2) = input
@@ -68,7 +68,7 @@ def solve(input):
         if peak_x < x1:
             continue
 
-        for y_velocity in range(y1, abs(y1) + 1):
+        for y_velocity in range(y1, abs(y1)):
 
             reached_target, highest_y, x, y, x_res_vel, y_res_vel = simulate(x_velocity, y_velocity, input)
 
