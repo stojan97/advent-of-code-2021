@@ -38,7 +38,7 @@ def simulate(x_velocity, y_velocity, input):
 
     while x <= x2 and y >= y1:
         if hit_target(x, y, input):
-            return True, highest_y, x, y, x_velocity, y_velocity
+            return True, highest_y
 
         highest_y = max(highest_y, y)
 
@@ -47,7 +47,7 @@ def simulate(x_velocity, y_velocity, input):
         x_velocity -= 1 if x_velocity > 0 else 0
         y_velocity -= 1
 
-    return False, highest_y, x, y, x_velocity, y_velocity
+    return False, highest_y
 
 
 def summation(n):
@@ -70,7 +70,7 @@ def solve(input):
 
         for y_velocity in range(y1, abs(y1)):
 
-            reached_target, highest_y, x, y, x_res_vel, y_res_vel = simulate(x_velocity, y_velocity, input)
+            reached_target, highest_y = simulate(x_velocity, y_velocity, input)
 
             if reached_target:
                 max_y = max(max_y, highest_y)
