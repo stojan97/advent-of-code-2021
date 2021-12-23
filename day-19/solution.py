@@ -152,6 +152,7 @@ def parse_scanners(input):
 input = get_input()
 scanners = parse_scanners(input)
 start = time.time()
+# 27 seconds on average.
 part1, part2 = solve(scanners)
 print(time.time() - start)
 print('Part 1:', part1, )
