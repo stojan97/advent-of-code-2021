@@ -28,18 +28,6 @@ def get_input():
     return scanners
 
 
-class Scanner:
-
-    def __init__(self, id, orientations, init_orientation_points):
-        self.id = id
-        self.orientations = orientations
-        self.init_orientation_points = init_orientation_points
-        self.init_points = len(self.init_orientation_points)
-
-    def __repr__(self):
-        return f'Scanner {self.id}: (scanned_points={self.init_points}'
-
-
 def find_intersecting_orientation_for_next_scanner(current_orientation, orientations):
     relocations_for_all_points = []
 
@@ -52,15 +40,13 @@ def find_intersecting_orientation_for_next_scanner(current_orientation, orientat
         orientation_set = set(orientation)
         for point in orientation:
             x1, y1, z1 = point
-            # all combinations of differences from each scanned point of the current scanners
+
             for relocating_point, point_relocations_to_other_points in relocations_for_all_points:
                 intersecting_points = 0
-                inter = set()
                 for relocation in point_relocations_to_other_points:
                     x, y, z = relocation
                     final_point = (x1 + x, y1 + y, z1 + z)
                     if final_point in orientation_set:
-                        inter.add(final_point)
                         intersecting_points += 1
 
                 if intersecting_points >= 12:
@@ -79,7 +65,8 @@ def dist(p1, p2):
 
 def solve(scanners):
     stack = deque()
-    stack.append((0, scanners[0].init_orientation_points))
+    _, init_orientation_points = scanners[0]
+    stack.append((0, init_orientation_points))
     visited = set()
     visited.add(0)
     explored_points = set()
@@ -93,7 +80,7 @@ def solve(scanners):
             if j in visited:
                 continue
 
-            orientations = scanners[j].orientations
+            orientations, _ = scanners[j]
             next_orientation, next_scanner = find_intersecting_orientation_for_next_scanner(current_orientation, orientations)
 
             if next_orientation:
@@ -143,7 +130,7 @@ def parse_scanners(input):
     for i in range(len(input)):
         init_orientation = input[i]
         orientations = get_all_orientations_for_scanner(init_orientation)
-        scanner = Scanner(i, orientations, init_orientation)
+        scanner = (orientations, init_orientation)
         scanners.append(scanner)
 
     return scanners
