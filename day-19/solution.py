@@ -94,8 +94,7 @@ def solve(scanners):
                 continue
 
             orientations = scanners[j].orientations
-            next_orientation, next_scanner = find_intersecting_orientation_for_next_scanner(current_orientation,
-                                                                                            orientations)
+            next_orientation, next_scanner = find_intersecting_orientation_for_next_scanner(current_orientation, orientations)
 
             if next_orientation:
                 stack.append((j, next_orientation))
