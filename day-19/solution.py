@@ -41,33 +41,33 @@ class Scanner:
 
 
 def find_intersecting_orientation_for_next_scanner(current_orientation, orientations):
-    differences_for_all_points = []
+    relocations_for_all_points = []
 
     for current_point in current_orientation:
         x1, y1, z1 = current_point
-        differences = [(x - x1, y - y1, z - z1) for x, y, z in current_orientation]
-        differences_for_all_points.append((current_point, differences))
+        relocations = [(x - x1, y - y1, z - z1) for x, y, z in current_orientation]
+        relocations_for_all_points.append((current_point, relocations))
 
     for orientation in orientations:
         orientation_set = set(orientation)
         for point in orientation:
             x1, y1, z1 = point
             # all combinations of differences from each scanned point of the current scanners
-            for from_point, differences_from_some_point in differences_for_all_points:
+            for relocating_point, point_relocations_to_other_points in relocations_for_all_points:
                 intersecting_points = 0
                 inter = set()
-                for diff_from_point in differences_from_some_point:
-                    x, y, z = diff_from_point
+                for relocation in point_relocations_to_other_points:
+                    x, y, z = relocation
                     final_point = (x1 + x, y1 + y, z1 + z)
                     if final_point in orientation_set:
                         inter.add(final_point)
                         intersecting_points += 1
 
                 if intersecting_points >= 12:
-                    point_differences = [(x - x1, y - y1, z - z1) for x, y, z in orientation]
-                    x_p, y_p, z_p = from_point
+                    next_scanner_point_relocations_to_other_points = [(x - x1, y - y1, z - z1) for x, y, z in orientation]
+                    x_p, y_p, z_p = relocating_point
                     scanner_point_relative_to_start = (x_p - x1, y_p - y1, z_p - z1)
-                    next_orientation = [(x_p + x, y_p + y, z_p + z) for x, y, z in point_differences]
+                    next_orientation = [(x_p + x, y_p + y, z_p + z) for x, y, z in next_scanner_point_relocations_to_other_points]
                     return next_orientation, scanner_point_relative_to_start
 
     return None, None
@@ -94,7 +94,8 @@ def solve(scanners):
                 continue
 
             orientations = scanners[j].orientations
-            next_orientation, next_scanner = find_intersecting_orientation_for_next_scanner(current_orientation, orientations)
+            next_orientation, next_scanner = find_intersecting_orientation_for_next_scanner(current_orientation,
+                                                                                            orientations)
 
             if next_orientation:
                 stack.append((j, next_orientation))
