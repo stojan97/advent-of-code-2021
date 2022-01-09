@@ -44,11 +44,13 @@ def solve(input, n):
             pixels[(i, j)] = input[i][j]
 
     next_alone_pixel = '0'
+    mini = 0
+    maxi = len(image[0])
 
     for k in range(n):
         new_pixels = {}
-        mini = min(pixels)[0] - 1
-        maxi = max(pixels)[0] + 1
+        mini -= 1
+        maxi += 1
 
         for i in range(mini, maxi + 1):
             for j in range(mini, maxi + 1):
