@@ -45,10 +45,11 @@ def get_input():
 
 def find_input(bi_graph, input, instructions, minimize):
     for i in range(len(instructions)):
-        add, subtract, mod = instructions[i]
-        if mod:
-            other_add, other_sub, _ = instructions[bi_graph[i]]
-            diff = other_add + subtract
+        _, subtract_const, is_inverse = instructions[i]
+        if is_inverse:
+            add_const, _, _ = instructions[bi_graph[i]]
+            diff = add_const + subtract_const
+
             if diff < 0:
                 if minimize:
                     input[bi_graph[i]] += abs(diff)
