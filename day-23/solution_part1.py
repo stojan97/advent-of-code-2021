@@ -221,6 +221,5 @@ def solve(input):
 input = get_input()
 start = time.time()
 # around 20 seconds for inputs with a lot of arrangements
-# TODO: amphipods list can be passed as a reference
 print('Part 1:', solve(input))
 print(time.time() - start)
