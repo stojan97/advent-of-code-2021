@@ -45,8 +45,9 @@ def get_input():
 
 def find_input(bi_graph, input, instructions, minimize):
     for i in range(len(instructions)):
-        _, subtract_const, is_inverse = instructions[i]
-        if is_inverse:
+        _, subtract_const, inverse_instruction = instructions[i]
+        if inverse_instruction:
+            # find the matching instruction
             add_const, _, _ = instructions[bi_graph[i]]
             diff = add_const + subtract_const
 
