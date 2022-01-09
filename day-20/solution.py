@@ -63,7 +63,6 @@ def solve(input, n):
 
         pixels = new_pixels
 
-    print('items', len(pixels))
     return sum(v == '1' for v in pixels.values())
 
 
