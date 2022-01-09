@@ -44,7 +44,6 @@ def get_input():
 
 
 def find_input(bi_graph, input, instructions, minimize):
-
     for i in range(len(instructions)):
         add, subtract, mod = instructions[i]
         if mod:
@@ -62,6 +61,7 @@ def find_input(bi_graph, input, instructions, minimize):
                     input[bi_graph[i]] -= abs(diff)
 
     return ''.join(map(str, input))
+
 
 def solve(instructions, bi_graph):
     # We can construct bi-graph from the input pairs which are dependant on each other
