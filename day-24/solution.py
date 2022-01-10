@@ -49,18 +49,18 @@ def find_input(bi_graph, input, instructions, minimize):
         if inverse_instruction:
             # find the matching instruction
             add_const, _, _ = instructions[bi_graph[i]]
-            diff_from_target = add_const + subtract_const
+            diff = add_const + subtract_const
 
-            if diff_from_target < 0:
+            if diff < 0:
                 if minimize:
-                    input[bi_graph[i]] += abs(diff_from_target)
+                    input[bi_graph[i]] += abs(diff)
                 else:
-                    input[i] -= abs(diff_from_target)
+                    input[i] -= abs(diff)
             else:
                 if minimize:
-                    input[i] += abs(diff_from_target)
+                    input[i] += abs(diff)
                 else:
-                    input[bi_graph[i]] -= abs(diff_from_target)
+                    input[bi_graph[i]] -= abs(diff)
 
     return ''.join(map(str, input))
 
