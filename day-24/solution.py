@@ -66,7 +66,7 @@ def find_input(matching_pair, input, instructions, minimize):
 
 
 def solve(instructions, matching_pair):
-    # We can construct bi-graph from the input pairs which are dependant on each other
+    # We can construct matching pairs from the procedures, (normal procedure, inverse procedure)
     maximized = find_input(matching_pair, [9] * len(instructions), instructions, False)
     minimized = find_input(matching_pair, [1] * len(instructions), instructions, True)
 
