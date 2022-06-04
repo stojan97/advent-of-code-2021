@@ -103,65 +103,6 @@ def is_target_completely_inside(cuboid, target):
     return x1t >= x1c and x2t <= x2c and y1t >= y1c and y2t <= y2c and z1t >= z1c and z2t <= z2c
 
 
-def dfs(current_cuboid_index, next_cuboid, state, cuboid, present_cuboids, cuboids):
-    if current_cuboid_index:
-        print(current_cuboid_index, len(present_cuboids))
-
-    if state:
-        # TURN ON
-
-        # remove completely inside
-        for target_cuboid in copy(present_cuboids):
-            if is_target_completely_inside(cuboid, target_cuboid):
-                present_cuboids.discard(target_cuboid)
-
-        # process overlapping
-        sliced = False
-        for target_cuboid in copy(present_cuboids):
-            intersection = get_intersection(cuboid, target_cuboid)
-            if intersection:
-                sliced = True
-                # remove target
-                present_cuboids.discard(target_cuboid)
-                # slice target by intersection
-                slices_from_target = get_slices(target_cuboid, intersection)
-                present_cuboids.update(slices_from_target)
-                # add intersection
-                present_cuboids.add(intersection)
-                # slice source by intersection
-                slices_from_source = get_slices(cuboid, intersection)
-
-                for source_slice in slices_from_source:
-                    dfs(None, None, True, source_slice, present_cuboids, cuboids)
-
-                break
-
-        if not sliced:
-            present_cuboids.add(cuboid)
-
-    else:
-        # TURN OFF
-        # remove completely inside first
-        for target_cuboid in copy(present_cuboids):
-            if is_target_completely_inside(cuboid, target_cuboid):
-                present_cuboids.discard(target_cuboid)
-
-        for target_cuboid in copy(present_cuboids):
-            intersection = get_intersection(cuboid, target_cuboid)
-            if intersection:
-                present_cuboids.discard(target_cuboid)
-                # add slices from target, but not the intersection
-                slices_from_target = get_slices(target_cuboid, intersection)
-                present_cuboids.update(slices_from_target)
-
-    if next_cuboid:
-        if next_cuboid == len(cuboids):
-            return
-
-        next_cuboid_state, next_to_process = cuboids[next_cuboid]
-        dfs(next_cuboid, next_cuboid + 1, next_cuboid_state, next_to_process, present_cuboids, cuboids)
-
-
 def get_cubes(cuboid):
     x1, x2, y1, y2, z1, z2 = cuboid
     diff_x = (x2 - x1) + 1
@@ -173,10 +114,19 @@ def get_cubes(cuboid):
 
 
 def part2(cuboids):
-    state, (x1, x2, y1, y2, z1, z2) = cuboids[0]
     present_cuboids = set()
 
-    dfs(0, 1, state, (x1, x2, y1, y2, z1, z2), present_cuboids, cuboids)
+    for state, cuboid in cuboids:
+        for other_cuboid in copy(present_cuboids):
+            intersection = get_intersection(cuboid, other_cuboid)
+            if intersection:
+                present_cuboids.discard(other_cuboid)
+                # add slices from target, but not the intersection
+                slices_from_target = get_slices(other_cuboid, intersection)
+                present_cuboids.update(slices_from_target)
+
+        if state:
+            present_cuboids.add(cuboid)
 
     res = sum(get_cubes(cuboid) for cuboid in present_cuboids)
 
@@ -184,7 +134,7 @@ def part2(cuboids):
 
 
 input = get_input()
-# print('Part 1:', part1(input))
+print('Part 1:', part1(input))
 start = time.time()
 # takes 1 min 20 sec
 print('Part 2:', part2(input))
