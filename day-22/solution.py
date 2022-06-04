@@ -137,6 +137,5 @@ def part2(cuboids):
 input = get_input()
 print('Part 1:', part1(input))
 start = time.time()
-# takes 1 min 20 sec
 print('Part 2:', part2(input))
 print((time.time() - start))
