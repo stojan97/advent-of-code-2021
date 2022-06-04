@@ -120,10 +120,11 @@ def part2(cuboids):
         for other_cuboid in copy(present_cuboids):
             intersection = get_intersection(cuboid, other_cuboid)
             if intersection:
+                # first remove other intersecting cuboid
                 present_cuboids.discard(other_cuboid)
-                # add slices from target, but not the intersection
-                slices_from_target = get_slices(other_cuboid, intersection)
-                present_cuboids.update(slices_from_target)
+                slices_from_other = get_slices(other_cuboid, intersection)
+                # push slices from other intersecting cuboid
+                present_cuboids.update(slices_from_other)
 
         if state:
             present_cuboids.add(cuboid)
